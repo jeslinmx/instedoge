@@ -25,14 +25,12 @@ function cloneImg (image) {
 	return img;
 }
 function detectNewImage(image) {
-	var comp = [];
-	for (var k = 1; k <= 10; k+=2) {
-		var tmpcomp = ccv.detect_objects({ "canvas" : ccv.grayscale(ccv.pre(image)),
+	//for (var k = 3; k <= 10; k+=2) {
+		var comp = ccv.detect_objects({ "canvas" : ccv.grayscale(ccv.pre(image)),
 									"cascade" : cascade,
-									"interval" : k,
-									"min_neighbors" : 2 });
-		if (tmpcomp.length > comp.length) comp = tempcomp;
-	}
+									"interval" : 5,
+									"min_neighbors" : 1 });
+	//}
 	return comp;
 }
 function ran_range(min, max) {
@@ -79,8 +77,8 @@ function processMeme(img, comp, phrases){
 	if (comp.length > 0) {
 		for (it in comp) {
 			var dog = doges[ran_range(0, doges.length)];
-			ctx.drawImage(dog, comp[it].x-(comp[it].height/1.5), comp[it].y-(comp[it].width/1.5), comp[it].height*7/3, comp[it].width*7/3);
-			//console.log(comp[it]);
+			ctx.drawImage(dog, comp[it].x-(comp[it].height/2), comp[it].y-(comp[it].width/2), comp[it].height*2, comp[it].width*2);
+			console.log(comp[it]);
 		}
 	}
 	else {
@@ -97,14 +95,58 @@ function processMeme(img, comp, phrases){
 		ctx.drawImage(tmpcanvas, 0, 0);
 		
 	}
+	var allPhrases = document.createElement('canvas');
+	allPhrases.height = allPhrases.width = 640;
 	for (it in phrases) {
-		var t = ran_range(0, colorList.length);
-		ctx.fillStyle = colorList[t];
-		var fontsize = ran_range(20, 36);
-	    ctx.font = fontsize+"px Comic Sans";
-	    var x = ran_range(50,400), y = ran_range(50,400);
-	    ctx.fillText(phrases[it], x, y);
+		var thisPhrase = document.createElement('canvas');
+		thisPhrase.height = thisPhrase.width = 640;
+		var ct = thisPhrase.getContext('2d');
+		while (1) {
+			//ct.clearRect(0, 0, thisPhrase.width, thisPhrase.height);
+			var t = ran_range(0, colorList.length);
+			var fontsize = ran_range(20, 36);
+			ct.fillStyle = colorList[t];
+		    ct.font = fontsize+"px Comic Sans";
+		    var x = ran_range(50,400), y = ran_range(50,600);
+		    ct.fillText(phrases[it], x, y);
+		    ct.save();
+		    
+		    if (clash(allPhrases, thisPhrase) == -1) continue;
+		    //if (checkContrast(canvas, thisPhrase) == -1) continue;
+		    break;
+		}
+		(allPhrases.getContext('2d')).drawImage(thisPhrase, 0, 0);
+		ct.save();
 	}
+	ctx.drawImage(allPhrases, 0, 0);
 	
 	return canvas.toDataURL("image/png");
+}
+function checkContrast (base, nxt) {
+	var a = base.getContext('2d').getImageData(0, 0, base.width, base.height).data;
+	var b = nxt.getContext('2d').getImageData(0, 0, nxt.width, nxt.height).data;
+	
+	var mindiff = 2000;
+	for(var i = 0, n = a.length; i < n; i += 4) {
+		var diff = 0;
+		for (var j=0;j<4;++j) {
+			diff += Math.abs(a[i+j] - b[i+j]);
+		}
+		mindiff = Math.min(mindiff, diff);
+		//console.log(diff);
+		
+    }
+    if (mindiff < 64) return -1;
+    console.log(mindiff);
+    return 1;
+}
+function clash (all, nxt) {
+	var a = all.getContext('2d').getImageData(0, 0, all.width, all.height).data;
+	var b = nxt.getContext('2d').getImageData(0, 0, nxt.width, nxt.height).data;
+	for(var i = 0, n = a.length; i < n; i += 4) {
+		var suma = a[i] + a[i+1] + a[i+2] + a[i+3];
+		var sumb = b[i] + b[i+1] + b[i+2] + b[i+3];
+		if (a>0 && b>0) return -1;
+    }
+    return 1;
 }
