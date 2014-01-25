@@ -106,7 +106,7 @@ function processMeme(img, comp, phrases){
 			var t = ran_range(0, colorList.length);
 			var fontsize = ran_range(20, 36);
 			ct.fillStyle = colorList[t];
-		    ct.font = fontsize+"px Comic Sans";
+		    ct.font = fontsize+"px 'Comic Sans MS'";
 		    var x = ran_range(50,400), y = ran_range(50,600);
 		    ct.fillText(phrases[it], x, y);
 		    ct.save();
@@ -119,7 +119,6 @@ function processMeme(img, comp, phrases){
 		ct.save();
 	}
 	ctx.drawImage(allPhrases, 0, 0);
-	
 	return canvas.toDataURL("image/png");
 }
 function checkContrast (base, nxt) {
