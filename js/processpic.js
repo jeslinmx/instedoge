@@ -25,10 +25,14 @@ function cloneImg (image) {
 	return img;
 }
 function detectNewImage(image) {
-	var comp = ccv.detect_objects({ "canvas" : ccv.grayscale(ccv.pre(image)),
+	var comp = [];
+	for (var k = 1; k <= 10; k+=2) {
+		var tmpcomp = ccv.detect_objects({ "canvas" : ccv.grayscale(ccv.pre(image)),
 									"cascade" : cascade,
-									"interval" : 5,
-									"min_neighbors" : 1 });
+									"interval" : k,
+									"min_neighbors" : 2 });
+		if (tmpcomp.length > comp.length) comp = tempcomp;
+	}
 	return comp;
 }
 function ran_range(min, max) {
@@ -75,11 +79,22 @@ function processMeme(img, comp, phrases){
 	if (comp.length > 0) {
 		for (it in comp) {
 			var dog = doges[ran_range(0, doges.length)];
-			ctx.drawImage(dog, comp[it].x-(comp[it].height/2), comp[it].y-(comp[it].width/2), comp[it].height*2, comp[it].width*2);
+			ctx.drawImage(dog, comp[it].x-(comp[it].height/1.5), comp[it].y-(comp[it].width/1.5), comp[it].height*7/3, comp[it].width*7/3);
 			//console.log(comp[it]);
 		}
 	}
 	else {
+		var tmpcanvas = document.createElement('canvas');
+		tmpcanvas.width = canvas.width;
+		tmpcanvas.height = canvas.height;
+		var context = tmpcanvas.getContext('2d');
+		context.drawImage(canvas, 0, 0);
+		var dog = doges[ran_range(0, doges.length)];
+		//context.globalCompositeOperation = 'soft-light';
+		context.globalAlpha = 0.8;
+		
+		context.drawImage(dog, 40, 40, 560, 560);
+		ctx.drawImage(tmpcanvas, 0, 0);
 		
 	}
 	for (it in phrases) {
