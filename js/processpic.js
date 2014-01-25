@@ -51,11 +51,12 @@ for (x in doges) {
 }
 function processWords(hashtags, words) {
 	var list = [];
-	for (x in hashtags) {
-		list.push(prepend[ran_range(0, prepend.length)]+" "+hashtags[x]);
-	}
 	var num = ran_range(5, 8);
-	list.push(additional[ran_range(0, additional.length)]);
+	for (x in hashtags) {
+		if (list.length < num) list.push(prepend[ran_range(0, prepend.length)]+" "+hashtags[x]);
+	}
+	
+	if (list.length < num) list.push(additional[ran_range(0, additional.length)]);
 	for (var k = list.length; k < num && words.length > 0; ++k) {
 		list.push(prepend[ran_range(0, prepend.length)]+" "+words.splice(ran_range(0, words.length), 1)[0]);
 	}
@@ -91,9 +92,9 @@ function processMeme(img, comp, phrases){
 		context.drawImage(canvas, 0, 0);
 		var dog = doges[ran_range(0, doges.length)];
 		//context.globalCompositeOperation = 'soft-light';
-		context.globalAlpha = 0.8;
+		context.globalAlpha = 0.7;
 		
-		context.drawImage(dog, 40, 40, 560, 560);
+		context.drawImage(dog, -80, -80, 780, 780);
 		ctx.drawImage(tmpcanvas, 0, 0);
 		
 	}
@@ -110,10 +111,12 @@ function processMeme(img, comp, phrases){
 			ct.fillStyle = colorList[t];
 		    ct.font = fontsize+"px 'Comic Sans MS'";
 		    var x = ran_range(50,400), y = ran_range(50,600);
-		    ct.fillText(phrases[it], x, y);
 		    ct.save();
-		    
-		    if (clash(allPhrases, thisPhrase) == -1) continue;
+		    ct.rotate(ran_range(-10, 11)/180*Math.PI);
+		    ct.textAlign = "center";
+		    ct.fillText(phrases[it], x, y);
+		    ct.restore();
+		    //if (clash(allPhrases, thisPhrase) == -1) continue;
 		    //if (checkContrast(canvas, thisPhrase) == -1) continue;
 		    break;
 		}
