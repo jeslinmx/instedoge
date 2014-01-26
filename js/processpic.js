@@ -104,6 +104,7 @@ function brightestSpotClosest (canvas, context) {
 		var posy = i%canvas.width;
 		s -= Math.abs(posx - (640/2));
 		s -= Math.abs(posy - (640/2));
+		s += ran_range(-10, 11);
 		if (s > mx) {
 			x = i;
 			mx = s;
