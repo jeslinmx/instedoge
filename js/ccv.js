@@ -99,7 +99,7 @@ var ccv = {
 		var data = imageData.data;
 		var pix1, pix2, pix = canvas.width * canvas.height * 4;
 		while (pix > 0)
-			data[pix -= 4] = data[pix1 = pix + 1] = data[pix2 = pix + 2] = (data[pix] * /*0.3*/ 0.35 + data[pix1] * 0.3 + data[pix2] * 0.06 /*0.11*/);
+			data[pix -= 4] = data[pix1 = pix + 1] = data[pix2 = pix + 2] = (data[pix] * 0.3+ data[pix1] * 0.59 + data[pix2] * 0.11);
 		ctx.putImageData(imageData, 0, 0);
 		return canvas;
 	},
