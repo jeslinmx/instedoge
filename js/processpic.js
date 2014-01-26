@@ -94,15 +94,15 @@ function brightestSpot(canvas, context) {
 function brightestSpotClosest (canvas, context) {
 	var h = canvas.height, w = canvas.width;
 	var x = 0, mx = 0;
-	var d = context.getImageData(0, 0, w, h).data;
+	var d = context.getImageData(0, 0, 640, 640).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
-		if (s>= 675) continue;
+		if (s>= 700) continue;
 		
 		var posx = Math.floor(i/canvas.width);
 		var posy = i%canvas.width;
-		s -= Math.abs(posx - 640/2);
-		s -= Math.abs(posy - 640/2);
+		s -= Math.abs(posx - (640/2));
+		s -= Math.abs(posy - (640/2));
 		if (s > mx) {
 			x = i;
 			mx = s;
