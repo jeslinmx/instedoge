@@ -102,8 +102,8 @@ function brightestSpotClosest (canvas, context) {
 		
 		var posx = Math.floor(i/canvas.width);
 		var posy = i%canvas.width;
-		s -= Math.abs(posx - (640/2));
-		s -= Math.abs(posy - (640/2));
+		s -= Math.abs(posx - (640/2))*2;
+		s -= Math.abs(posy - (640/2))*2;
 		s += ran_range(-10, 11);
 		if (s > mx) {
 			x = i;
@@ -111,7 +111,7 @@ function brightestSpotClosest (canvas, context) {
 			console.log(s);
 		}	
 		else if (s == mx) {
-			if (Math.random()>0.2) x = i;
+			if (Math.random()>0.5) x = i;
 		}
 	}
 	return Math.floor(x/4);
