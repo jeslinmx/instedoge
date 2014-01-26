@@ -145,7 +145,7 @@ function processMeme(img, comp, phrases){
 		var z = brightestSpotClosest(canvas, ctx);
 		var x = Math.floor(z/canvas.width);
 		var y = z%canvas.width;
-		context.drawImage(dog, x-50, y-50, 100, 100);
+		context.drawImage(dog, y-50, x-50, 100, 100);
 		console.log(x+" "+y);
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
