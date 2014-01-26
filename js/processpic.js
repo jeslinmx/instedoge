@@ -97,7 +97,7 @@ function processMeme(img, comp, phrases){
 		context.drawImage(canvas, 0, 0);
 		var dog = doges[ran_range(0, doges.length)];
 		//context.globalCompositeOperation = 'soft-light';
-		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 		var brightestsum = 0;
 		for(var i = 0, n = imgData.length; i < n; i += 4) {
 			var sum = imgData[i] + imgData[i+1] + imgData[i+2] + imgData[i+3];
