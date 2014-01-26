@@ -143,11 +143,11 @@ function processMeme(img, comp, phrases){
 			}
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
-		    var pix = ctx.getImageData(0, 0, 1, 1).data;
+		    var pix = ctx.getImageData(x, y, 1, 1).data;
 		    var pixsum = pix[0] + pix[1] + pix[2] + pix[3];
-		    var t;
+		    
 		    for (var z = 0; z < 3; ++z) {
-		    	if (pixsum > 700) t = ran_range(3, colorList.length); //light
+		    	if (pixsum > 500) t = ran_range(3, colorList.length); //light
 				else t = ran_range(0, 5); //dark
 				if (t in usedColour) continue;
 				usedColour[t] = 1;
