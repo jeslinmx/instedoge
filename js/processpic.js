@@ -86,7 +86,7 @@ function brightestSpot(canvas, context) {
 			if (Math.random()>0.5) x = i;
 		}
 	}
-	return x;
+	return Math.floor(x/4);
 }
 function processMeme(img, comp, phrases){
 	//console.log(phrases);
