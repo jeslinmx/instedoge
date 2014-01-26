@@ -106,6 +106,7 @@ function brightestSpotClosest (canvas, context) {
 		if (s > mx) {
 			x = i;
 			mx = s;
+			console.log(s);
 		}
 		else if (s == mx) {
 			if (Math.random()>0.2) x = i;
