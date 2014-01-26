@@ -9,7 +9,7 @@ doge.controller('dogeCtrl', function ($scope) {
 			localStorage["accessToken"] = $scope.accessToken;
 		}
 		$scope.accessToken = localStorage["accessToken"];
-		if ($scope.accessToken == "undefined") {
+		if (typeof($scope.accessToken) == "undefined") {
 			window.location.href = $scope.authURL;
 		}
 		else {
