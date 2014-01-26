@@ -95,7 +95,6 @@ function brightestSpotClosest (canvas, context) {
 	var h = canvas.height, w = canvas.width;
 	var x = 0, mx = 0;
 	var d = context.getImageData(0, 0, 640, 640).data;
-	console.log("Length: "+d.length);
 	var d = context.getImageData(0, 0, w, h).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
@@ -108,7 +107,6 @@ function brightestSpotClosest (canvas, context) {
 		if (s > mx) {
 			x = i;
 			mx = s;
-			console.log(s);
 		}	
 		else if (s == mx) {
 			if (Math.random()>0.5) x = i;
