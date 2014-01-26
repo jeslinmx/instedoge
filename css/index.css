@@ -10,7 +10,8 @@
 }
 nav {
 	position: absolute;
-	left: -150px;
+	left: -40px;
+	margin-top: 40px;
 }
 #feed {
 	position: relative;

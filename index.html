@@ -22,10 +22,10 @@
 		<div class='container'>
 			<nav>
 				<div class='btn-group-vertical'>
-					<a class='btn btn-default' href="#" data-placement='left' title='doge'><span class='glyphicon glyphicon-home'></span></a>
-					<a class='btn btn-default' href="#" data-placement='left' title='dogesecrate my likes'><span class='glyphicon glyphicon-heart'></span></a>
-					<a class='btn btn-default' href="#" data-placement='left' title='hot doge'><span class='glyphicon glyphicon-fire'></span></a>
-					<a class='btn btn-danger' href="#" data-placement='left' title='dogeout'><span class='glyphicon glyphicon-off'></span></a>
+					<a class='btn btn-default' ng-click='changeFeed("https://api.instagram.com/v1/users/self/feed")' href="#" data-placement='left' title='doge'><span class='glyphicon glyphicon-home'></span></a>
+					<a class='btn btn-default' ng-click='changeFeed("https://api.instagram.com/v1/users/self/media/liked")' href="#" data-placement='left' title='dogesecrate my likes'><span class='glyphicon glyphicon-heart'></span></a>
+					<a class='btn btn-default' ng-click='changeFeed("https://api.instagram.com/v1/media/popular")' href="#" data-placement='left' title='hot doge'><span class='glyphicon glyphicon-fire'></span></a>
+					<a class='btn btn-danger' ng-click='logout()' href="#" data-placement='left' title='dogeout'><span class='glyphicon glyphicon-off'></span></a>
 				</div>
 			</nav>
 		</div>

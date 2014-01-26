@@ -2,11 +2,13 @@ var doge = angular.module('doge', []);
 doge.controller('dogeCtrl', function ($scope) {
 	$scope.processedBase64 = {};
 	$scope.authURL = "https://instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token";
+	$scope.feedURL = "https://api.instagram.com/v1/users/self/feed"
 	$scope.getAuth = function() {
 		var urlArray = window.location.href.split("#access_token=");
 		if (urlArray.length > 1) {
 			$scope.accessToken = urlArray[urlArray.length - 1];
 			localStorage["accessToken"] = $scope.accessToken;
+			window.location = urlArray[0];
 		}
 		$scope.accessToken = localStorage["accessToken"];
 		if (typeof($scope.accessToken) == "undefined") {
@@ -18,7 +20,7 @@ doge.controller('dogeCtrl', function ($scope) {
 	}
 	$scope.getMoar = function() {
 		return $.ajax({
-			url: "https://api.instagram.com/v1/users/self/feed",
+			url: $scope.feedURL,
 			data: {access_token: $scope.accessToken},
 			type: "GET",
 			dataType: "jsonp"
@@ -58,20 +60,18 @@ doge.controller('dogeCtrl', function ($scope) {
 			console.log("very " + e);
 		});;
 	}
-
-	// for (var x in $scope.data) {
-	// 	if ($scope.data[x].type == "image") {
-	// 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
-	// 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text, x).done(function(d,s,j){
-	// 			generateMeme(d.base64, $scope.data[d.x].caption.text).done(function(meme) {
-	// 				$scope.processedBase64[d.x] = meme;
-	// 				$scope.$apply();
-	// 			});
-	// 		});
-	// 	}
-	// }
+	$scope.changeFeed = function (url) {
+		$scope.data = null;
+		$scope.processedBase64 = null;
+		$scope.feedURL = url;
+		$scope.getMoar();
+	}
+	$scope.logout = function () {
+		localStorage.removeItem("accessToken");
+		window.location = window.location.href;
+	}
 })
 
-$(function () {
-	$("nav .btn").tooltip();
-})
+// $(function () {
+// 	$("nav .btn").tooltip();
+// })
