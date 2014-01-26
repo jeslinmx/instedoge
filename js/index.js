@@ -17,13 +17,14 @@ doge.controller('dogeCtrl', function ($scope) {
 		}
 	}
 	$scope.getMoar = function() {
-		$.ajax({
+		return $.ajax({
 			url: "https://api.instagram.com/v1/users/self/feed",
-			data: {access_token: $scope.access_token},
+			data: {access_token: $scope.accessToken},
 			type: "GET",
 			dataType: "jsonp"
 		}).done(function(d, s, j) {
 			$scope.data = d.data;
+			$scope.$apply();
 		}).fail(function(s, j, e) {
 			if (j.statusCode() == 400) window.location.href = $scope.authURL;
 		});
