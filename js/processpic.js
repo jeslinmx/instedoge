@@ -80,7 +80,7 @@ function brightestSpot(canvas, context) {
 	var d = context.getImageData(0, 0, w, h).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
-		if (s>= 750) continue;
+		if (s>= 700) continue;
 		if (s > mx) x = i;
 		else if (s == mx) {
 			if (Math.random()>0.5) x = i;
