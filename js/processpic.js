@@ -80,8 +80,11 @@ function brightestSpot(canvas, context) {
 	var d = context.getImageData(0, 0, w, h).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
-		if (s>= 700) continue;
-		if (s > mx) x = i;
+		if (s>= 725) continue;
+		if (s > mx) {
+			x = i;
+			mx = s;
+		}
 		else if (s == mx) {
 			if (Math.random()>0.5) x = i;
 		}
@@ -149,7 +152,7 @@ function processMeme(img, comp, phrases){
 		    pixsum/=(20*20*4);
 		    
 		    for (var z = 0; z < 3; ++z) {
-		    	if (pixsum > 128) t = ran_range(3, colorList.length); //light
+		    	if (pixsum > 175) t = ran_range(3, colorList.length); //light
 				else t = ran_range(0, 5); //dark
 				//if (t in usedColour) continue;
 				//usedColour[t] = 1;
