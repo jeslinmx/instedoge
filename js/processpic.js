@@ -117,9 +117,9 @@ function processMeme(img, comp, phrases){
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
 		    var pix = ctx.getImageData(0, 0, 1, 1).data;
-		    var pixsum = pix[0] + pix[1] + pix[2];
+		    var pixsum = pix[0] + pix[1] + pix[2] + pix[3];
 		    var t;
-		    if (pixsum > 512) t = ran_range(3, colorList.length); //light
+		    if (pixsum > 700) t = ran_range(3, colorList.length); //light
 		    else t = ran_range(0, 5); //dark
 		    
 			ct.fillStyle = colorList[t];
