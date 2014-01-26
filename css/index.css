@@ -1,0 +1,58 @@
+#feed {
+	position: relative;
+	padding-top: 80px;
+}
+.media, .image {
+	position: relative;
+}
+.media {
+	padding: 0;
+}
+.verylikes {
+	color: #fff;
+	position: absolute;
+	height: 40px;
+	bottom: 0; left: 0; right: 0;
+	opacity: 0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-image: -webkit-linear-gradient(to top, rgba(0,0,0,255), rgba(0,0,0,0));
+	background-image: linear-gradient(to top, rgba(0,0,0,255), rgba(0,0,0,0));
+	-webkit-transition: opacity 0.4s;
+	transition: opacity 0.4s;
+}
+.media:hover .verylikes, .verylikes:hover {
+	opacity: 40;
+}
+.likes {
+	margin: 0 15px;
+	height: 20px;
+}
+.caption_text {
+	margin: 0 15px;
+	height: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.user {
+	position: absolute;
+	top: 0; right: -185px;
+	width: 175px;
+	overflow: hidden;
+	text-overflow: clip;
+	opacity: 0;
+	-webkit-transition: opacity 0.4s;
+	transition: opacity 0.4s;
+}
+.media:hover .user {
+	opacity: 40;
+}
+.profile_picture {
+	float: left;
+	width: 50px;
+}
+.full_name, .created_time {
+	position: relative;
+	left: 10px;
+}

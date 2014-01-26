@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app='doge'>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.9/angular.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+	
+	<script src="js/token.js"></script>
+	<script src="js/ccv.js"></script>
+	<script src="js/face.js"></script>
+	<script src="js/processpic.js"></script>
+	
+	
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body ng-controller='dogeCtrl' ng-init='getAuth()'>
+	<div id='feed' class='container'>
+
+		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
+			<div class='image'>
+				{{processImage($index)}}
+				<img class='img-responsive' ng-src="{{processedBase64[$index]}}">
+				<div class='verylikes'>
+					<span class='likes pull-right'><span class='glyphicon glyphicon-heart'></span> {{image.likes.count}}</span>
+					<div class='caption_text'>{{image.caption.text}}</div>
+				</div>
+			</div>
+			<div class='user'>
+				<div style='height:100%'><img class='profile_picture' ng-src="{{image.user.profile_picture}}"></div>
+				<div class='full_name'>{{image.user.full_name}}</div>
+				<div class='created_time'>{{convertTimestamp(image.created_time)}}</div>
+			</div>
+		</div>
+
+	</div>
+	<a href="https://api.instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token"></a>
+</body>
+</html>
