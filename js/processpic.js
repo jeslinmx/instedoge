@@ -80,7 +80,7 @@ function brightestSpot(canvas, context) {
 	var d = context.getImageData(0, 0, w, h).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
-		if (s>= 725) continue;
+		if (s>= 750) continue;
 		if (s > mx) {
 			x = i;
 			mx = s;
@@ -99,7 +99,7 @@ function brightestSpotClosest (canvas, context) {
 	var d = context.getImageData(0, 0, w, h).data;
 	for (var i = 0, n = d.length; i < n; i+=4) {
 		var s = d[i] + d[i+1] + d[i+2];
-		if (s>= 675) continue;
+		if (s>= 725) continue;
 		var posx = Math.floor(i/canvas.width);
 		var posy = i%canvas.width;
 		s -= Math.abs(posx - (640/2))*2;
@@ -143,11 +143,11 @@ function processMeme(img, comp, phrases){
 		//context.globalCompositeOperation = 'soft-light';
 		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 		
-		context.globalAlpha = 0.8;
+		context.globalAlpha = 0.6;
 		var z = brightestSpotClosest(canvas, ctx);
 		var x = Math.floor(z/canvas.width);
 		var y = z%canvas.width;
-		context.drawImage(dog, y-50, x-50, 100, 100);
+		context.drawImage(dog, y-250, x-250, 500, 500);
 		console.log(x+" "+y);
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
@@ -169,7 +169,7 @@ function processMeme(img, comp, phrases){
 		    var x = ran_range(150,450), y = ran_range(50,600);
 		    var fail = 0;
 		    for (var k = 0; k < savePos.length && fail == 0; ++k) {
-				if (Math.abs(savePos[k][0] - x)<150 && Math.abs(savePos[k][1] - y)<50) fail = 1;
+				if (Math.abs(savePos[k][0] - x)<75 && Math.abs(savePos[k][1] - y)<50) fail = 1;
 			}
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
