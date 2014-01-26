@@ -28,7 +28,10 @@ doge.controller('dogeCtrl', function ($scope) {
 			$scope.data = d.data;
 			$scope.$apply();
 		}).fail(function(s, j, e) {
-			if (j.statusCode() == 400) window.location.href = $scope.authURL;
+			if (j.statusCode() == 400) {
+				localStorage.removeItem("accessToken");
+				window.location.href = $scope.authURL;
+			}
 		});
 	}
     $scope.convertTimestamp = function(timestamp) {
@@ -61,8 +64,8 @@ doge.controller('dogeCtrl', function ($scope) {
 		});;
 	}
 	$scope.changeFeed = function (url) {
-		$scope.data = null;
-		$scope.processedBase64 = null;
+		$scope.data = {};
+		$scope.processedBase64 = {};
 		$scope.feedURL = url;
 		$scope.getMoar();
 	}
