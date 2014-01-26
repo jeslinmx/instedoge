@@ -21,7 +21,7 @@
 	<nav id='navbar' class='navbar navbar-default navbar-fixed-top'></nav>
 	<div id='feed' class='container'>
 
-		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"} | limitTo: 1'>
+		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
 			<div class='image'>
 				<img class='img-responsive' ng-src="{{processedBase64[$index]}}">
 				<div class='verylikes'>

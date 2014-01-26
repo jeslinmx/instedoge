@@ -1,4 +1,5 @@
 function generateMeme(src, caption) {
+	var deferred = $.Deferred();
 	var img = document.createElement('img');
 	img.src = src;
 	img.onload = function () {
@@ -6,17 +7,19 @@ function generateMeme(src, caption) {
 		var comp = detectNewImage(this);
 		var tok = produceTokens(caption);
 		var meme = processMeme(this, comp, processWords(tok['hashtags'], tok['words']));
-		img.src = meme;
-		appendImage(img);
+		deferred.resolve(meme);
+		// img.src = meme;
+		// appendImage(img);
 	}
+	//console.log(produceTokens(img.caption));
+	return deferred.promise();
 }
 function appendImage (img) {
 	/* Insert your callback here? */	
 	var canvas = document.createElement('canvas');
 	canvas.width = canvas.height = 640;
 	var context = canvas.getContext("2d");
-	context.drawImage(img, 0, 0);		
-	document.body.appendChild(canvas);
+	context.drawImage(img, 0, 0);
 }
 
 function cloneImg (image) {

@@ -16,9 +16,12 @@ doge.controller('dogeCtrl', function ($scope) {
 
 	for (var x in $scope.data) {
 		if ($scope.data[x].type == "image") {
+			if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
 			$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text, x).done(function(d,s,j){
-				console.log($scope.data[d.x])
-				$scope.processedBase64[d.x] = generateMeme(d.base64, $scope.data[d.x]);
+				generateMeme(d.base64, $scope.data[d.x].caption.text).done(function(meme) {
+					$scope.processedBase64[d.x] = meme;
+					$scope.$apply();
+				});
 			});
 		}
 	}
