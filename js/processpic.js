@@ -91,6 +91,28 @@ function brightestSpot(canvas, context) {
 	}
 	return Math.floor(x/4);
 }
+function brightestSpotClosest (canvas, context) {
+	var h = canvas.height, w = canvas.width;
+	var x = 0, mx = 0;
+	var d = context.getImageData(0, 0, w, h).data;
+	for (var i = 0, n = d.length; i < n; i+=4) {
+		var s = d[i] + d[i+1] + d[i+2];
+		if (s>= 675) continue;
+		
+		var posx = Math.floor(i/canvas.width);
+		var posy = i%canvas.width;
+		s -= Math.abs(posx - 640/2);
+		s -= Math.abs(posy - 640/2);
+		if (s > mx) {
+			x = i;
+			mx = s;
+		}
+		else if (s == mx) {
+			if (Math.random()>0.2) x = i;
+		}
+	}
+	return Math.floor(x/4);
+}
 function processMeme(img, comp, phrases){
 	//console.log(phrases);
 	var canvas = document.createElement('canvas');
