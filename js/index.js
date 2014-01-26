@@ -27,6 +27,7 @@ doge.controller('dogeCtrl', function ($scope) {
 			dataType: "jsonp"
 		}).done(function(d, s, j) {
 			$scope.data = $scope.data.concat(d.data);
+			$scope.feedURL = d.pagination.next_url;
 			$scope.$apply();
 		}).fail(function(j, s, e) {
 			if (j.statusCode() == 400) {
