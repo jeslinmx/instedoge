@@ -18,7 +18,6 @@
 	<script src="js/index.js"></script>
 </head>
 <body ng-controller='dogeCtrl' ng-init='getAuth()'>
-	<nav id='navbar' class='navbar navbar-default navbar-fixed-top'></nav>
 	<div id='feed' class='container'>
 
 		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
