@@ -143,9 +143,11 @@ function processMeme(img, comp, phrases){
 		//var z = brightestSpotClosest(canvas, ctx);
 		//var x = Math.floor(z/canvas.width);
 		//var y = z%canvas.width;
-		var x = ran_range(50, 600);
-		var y = ran_range(50, 600);
-		context.drawImage(dog, y-25, x-25, 50, 50);
+		for (var k = 0; k < 3; ++k) {
+			var x = ran_range(50, 600);
+			var y = ran_range(50, 600);
+			context.drawImage(dog, y-25, x-25, 50, 50);
+		}
 		//console.log(x+" "+y);
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
