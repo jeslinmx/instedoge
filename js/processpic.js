@@ -181,7 +181,7 @@ function processMeme(img, comp, phrases){
 				else t = ran_range(0, 5); //dark
 				//if (t in usedColour) continue;
 				//usedColour[t] = 1;
-				//break;
+				break;
 			}
 			ct.fillStyle = colorList[t];
 		    ct.save();
