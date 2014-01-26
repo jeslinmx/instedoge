@@ -74,6 +74,20 @@ function processWords(hashtags, words) {
 	}
 	return uniquelist;
 }
+function brightestSpot(canvas, context) {
+	var h = canvas.height, w = canvas.width;
+	var x = 0, mx = 0;
+	var d = context.getImageData(0, 0, w, h).data;
+	for (int i = 0, n = d.length; i < n; i+=4) {
+		var s = d[i] + d[i+1] + d[i+2];
+		if (s>= 750) continue;
+		if (s > mx) x = i;
+		else if (s == mx) {
+			if (Math.random()>0.5) x = i;
+		}
+	}
+	return x;
+}
 function processMeme(img, comp, phrases){
 	//console.log(phrases);
 	var canvas = document.createElement('canvas');
@@ -98,22 +112,13 @@ function processMeme(img, comp, phrases){
 		var dog = doges[ran_range(0, doges.length)];
 		//context.globalCompositeOperation = 'soft-light';
 		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-		var brightestsum = 0;
-		for(var i = 0, n = imgData.length; i < n; i += 4) {
-			var sum = imgData[i] + imgData[i+1] + imgData[i+2] + imgData[i+3];
-			if (sum > brightestsum) brightestsum = sum;
-		}
-		console.log("Brightest = "+brightestsum);
 		
 		context.globalAlpha = 0.8;
-		for(var i = 0, n = imgData.length; i < n; i += 4) {
-			var sum = imgData[i] + imgData[i+1] + imgData[i+2] + imgData[i+3];
-			if (sum >= brightestsum) {
-				var x = Math.floor(i/canvas.width);
-				var y = i%canvas.width;
-				context.drawImage(dog, x-50, y-50, 100, 100);
-			}
-		}
+		var z = brightestSpot(canvas, ctx);
+		var x = Math.floor(z/canvas.width);
+		var y = z%canvas.width;
+		context.drawImage(dog, x-50, y-50, 100, 100);
+		
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
 		ctx.drawImage(tmpcanvas, 0, 0);
@@ -122,6 +127,7 @@ function processMeme(img, comp, phrases){
 	var allPhrases = document.createElement('canvas');
 	allPhrases.height = allPhrases.width = 640;
 	var savePos = [];
+	var usedColour = {};
 	for (it in phrases) {
 		var thisPhrase = document.createElement('canvas');
 		thisPhrase.height = thisPhrase.width = 640;
@@ -140,9 +146,13 @@ function processMeme(img, comp, phrases){
 		    var pix = ctx.getImageData(0, 0, 1, 1).data;
 		    var pixsum = pix[0] + pix[1] + pix[2] + pix[3];
 		    var t;
-		    if (pixsum > 700) t = ran_range(3, colorList.length); //light
-		    else t = ran_range(0, 5); //dark
-		    
+		    for (var z = 0; z < 3; ++z) {
+		    	if (pixsum > 700) t = ran_range(3, colorList.length); //light
+				else t = ran_range(0, 5); //dark
+				if (t in usedColour) continue;
+				usedColour[t] = 1;
+				break;
+			}
 			ct.fillStyle = colorList[t];
 		    ct.save();
 		    if (Math.random()>0.5) ct.rotate(ran_range(-10, 11)/180*Math.PI);
