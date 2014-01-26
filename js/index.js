@@ -21,8 +21,16 @@ doge.controller('dogeCtrl', function ($scope) {
 			generateMeme(d.base64, $scope.data[x].caption.text).done(function(meme) {
 				$scope.processedBase64[x] = meme;
 				$scope.$apply();
+			}).fail(function(s, j, e) {
+				$scope.processedBase64[x] = "error.png";
+				$scope.$apply();
+				console.log("very " + e);
 			});
-		});
+		}).fail(function(s, j, e) {
+			$scope.processedBase64[x] = "error.png";
+			$scope.$apply();
+			console.log("very " + e);
+		});;
 	}
 
 	// for (var x in $scope.data) {

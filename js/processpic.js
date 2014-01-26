@@ -11,6 +11,9 @@ function generateMeme(src, caption) {
 		// img.src = meme;
 		// appendImage(img);
 	}
+	img.onerror = function () {
+		deferred.reject("process failure");
+	}
 	//console.log(produceTokens(img.caption));
 	return deferred.promise();
 }
