@@ -21,7 +21,8 @@ doge.controller('dogeCtrl', function ($scope) {
 		$.ajax({
 			url: "https://api.instagram.com/v1/users/self/feed",
 			data: {access_token: $scope.access_token},
-			type: "GET"
+			type: "GET",
+			dataType: "jsonp"
 		}).done(function(d, s, j) {
 			$scope.data = d.data;
 		}).fail(function(s, j, e) {
