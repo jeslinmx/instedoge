@@ -6,23 +6,34 @@ doge.controller('dogeCtrl', function ($scope) {
     $scope.convertTimestamp = function(timestamp) {
 		return moment.unix(timestamp).calendar();
 	}
-	$scope.getBase64 = function (src, caption, x) {
+	$scope.getBase64 = function (src, caption) {
 		return $.ajax({
 			url: "http://urltobase64.codecla.ws/?",
-			data: {url: src, x: x},
+			data: {url: src},
 			dataType: "jsonp"
 		});
 	};
-
-	for (var x in $scope.data) {
-		if ($scope.data[x].type == "image") {
-			if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
-			$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text, x).done(function(d,s,j){
-				generateMeme(d.base64, $scope.data[d.x].caption.text).done(function(meme) {
-					$scope.processedBase64[d.x] = meme;
-					$scope.$apply();
-				});
+	$scope.processImage = function (x) {
+		if ($scope.processedBase64[x]) return;
+		$scope.processedBase64[x] = "loading.gif"
+		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
+		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
+			generateMeme(d.base64, $scope.data[x].caption.text).done(function(meme) {
+				$scope.processedBase64[x] = meme;
+				$scope.$apply();
 			});
-		}
+		});
 	}
+
+	// for (var x in $scope.data) {
+	// 	if ($scope.data[x].type == "image") {
+	// 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
+	// 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text, x).done(function(d,s,j){
+	// 			generateMeme(d.base64, $scope.data[d.x].caption.text).done(function(meme) {
+	// 				$scope.processedBase64[d.x] = meme;
+	// 				$scope.$apply();
+	// 			});
+	// 		});
+	// 	}
+	// }
 })
