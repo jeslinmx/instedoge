@@ -139,7 +139,7 @@ function processMeme(img, comp, phrases){
 		//context.globalCompositeOperation = 'soft-light';
 		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 		
-		context.globalAlpha = 0.6;
+		context.globalAlpha = 0.7;
 		//var z = brightestSpotClosest(canvas, ctx);
 		//var x = Math.floor(z/canvas.width);
 		//var y = z%canvas.width;
