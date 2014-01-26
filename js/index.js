@@ -28,7 +28,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		}).done(function(d, s, j) {
 			$scope.data.concat(d.data);
 			$scope.$apply();
-		}).fail(function(s, j, e) {
+		}).fail(function(j, s, e) {
 			if (j.statusCode() == 400) {
 				localStorage.removeItem("accessToken");
 				window.location.href = $scope.authURL;
@@ -53,12 +53,12 @@ doge.controller('dogeCtrl', function ($scope) {
 			generateMeme(d.base64, $scope.data[x].caption.text).done(function(meme) {
 				$scope.processedBase64[x] = meme;
 				$scope.$apply();
-			}).fail(function(s, j, e) {
+			}).fail(function(j, s, e) {
 				$scope.processedBase64[x] = "error.png";
 				$scope.$apply();
 				console.log("very " + e);
 			});
-		}).fail(function(s, j, e) {
+		}).fail(function(j, s, e) {
 			$scope.processedBase64[x] = "error.png";
 			$scope.$apply();
 			console.log("very " + e);
