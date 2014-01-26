@@ -165,7 +165,7 @@ function processMeme(img, comp, phrases){
 		    var x = ran_range(150,450), y = ran_range(50,600);
 		    var fail = 0;
 		    for (var k = 0; k < savePos.length && fail == 0; ++k) {
-				if (Math.abs(savePos[k][0] - x)<75 && Math.abs(savePos[k][1] - y)<50) fail = 1;
+				if (Math.abs(savePos[k][0] - x)<125 && Math.abs(savePos[k][1] - y)<75) fail = 1;
 			}
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
