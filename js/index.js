@@ -4,13 +4,12 @@ doge.controller('dogeCtrl', function ($scope) {
 	$scope.authURL = "https://instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token";
 	$scope.getAuth = function() {
 		var urlArray = window.location.href.split("#");
-		$scope.accessToken = "";
 		if (urlArray.length > 1) {
 			$scope.accessToken = urlArray[urlArray.length - 1];
 			localStorage["accessToken"] = $scope.accessToken;
 		}
 		$scope.accessToken = localStorage["accessToken"];
-		if ($scope.accessToken === null) {
+		if ($scope.accessToken == "undefined") {
 			window.location.href = $scope.authURL;
 		}
 		else {
