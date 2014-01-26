@@ -140,11 +140,13 @@ function processMeme(img, comp, phrases){
 		var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
 		
 		context.globalAlpha = 0.6;
-		var z = brightestSpotClosest(canvas, ctx);
-		var x = Math.floor(z/canvas.width);
-		var y = z%canvas.width;
-		context.drawImage(dog, y-250, x-250, 500, 500);
-		console.log(x+" "+y);
+		//var z = brightestSpotClosest(canvas, ctx);
+		//var x = Math.floor(z/canvas.width);
+		//var y = z%canvas.width;
+		var x = ran_range(50, 600);
+		var y = ran_range(50, 600);
+		context.drawImage(dog, y-25, x-25, 50, 50);
+		//console.log(x+" "+y);
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
 		ctx.drawImage(tmpcanvas, 0, 0);
