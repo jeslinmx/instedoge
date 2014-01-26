@@ -92,7 +92,6 @@ function brightestSpot(canvas, context) {
 	return Math.floor(x/4);
 }
 function brightestSpotClosest (canvas, context) {
-	return 0;
 	var h = canvas.height, w = canvas.width;
 	var x = 0, mx = 0;
 	var d = context.getImageData(0, 0, 640, 640).data;
@@ -170,7 +169,7 @@ function processMeme(img, comp, phrases){
 		    var x = ran_range(150,450), y = ran_range(50,600);
 		    var fail = 0;
 		    for (var k = 0; k < savePos.length && fail == 0; ++k) {
-				if (Math.abs(savePos[k][0] - x)<150 && Math.abs(savePos[k][1] - y)<100) fail = 1;
+				if (Math.abs(savePos[k][0] - x)<150 && Math.abs(savePos[k][1] - y)<50) fail = 1;
 			}
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
