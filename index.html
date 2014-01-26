@@ -18,7 +18,7 @@
 	<script src="js/index.js"></script>
 </head>
 <body ng-controller='dogeCtrl' ng-init='getAuth()'>
-	<div id='fthepolice'>
+	<!--<div id='fthepolice'>
 			<div class='container'>
 				<nav>
 					<div class='btn-group-vertical'>
@@ -29,7 +29,7 @@
 					</div>
 				</nav>
 			</div>
-		</div>
+		</div>-->
 
 	<div id='feed' class='container'>
 
@@ -42,11 +42,30 @@
 					<div class='caption_text'>{{image.caption.text}}</div>
 				</div>
 			</div>
-			<div class='user'>
+			<!--<div class='user'>
 				<div style='height:100%'><img class='profile_picture' ng-src="{{image.user.profile_picture}}"></div>
 				<div class='full_name'>{{image.user.full_name}}</div>
 				<div class='created_time'>{{convertTimestamp(image.created_time)}}</div>
+			</div>-->
+		</div>
+
+	</div>
+	<div id='feed2' class='container'>
+
+		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
+			<div class='image'>
+				{{processImage($index)}}
+				<img class='img-responsive' ng-src="{{image.images.standard_resolution}}">
+				<div class='verylikes'>
+					<span class='likes pull-right'><span class='glyphicon glyphicon-heart'></span> {{image.likes.count}}</span>
+					<div class='caption_text'>{{image.caption.text}}</div>
+				</div>
 			</div>
+			<!--<div class='user'>
+				<div style='height:100%'><img class='profile_picture' ng-src="{{image.user.profile_picture}}"></div>
+				<div class='full_name'>{{image.user.full_name}}</div>
+				<div class='created_time'>{{convertTimestamp(image.created_time)}}</div>
+			</div>-->
 		</div>
 
 	</div>
