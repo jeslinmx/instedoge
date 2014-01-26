@@ -20,6 +20,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		}
 	}
 	$scope.getMoar = function() {
+		$(window).off("scroll");
 		return $.ajax({
 			url: $scope.feedURL,
 			data: {access_token: $scope.accessToken},
@@ -29,6 +30,12 @@ doge.controller('dogeCtrl', function ($scope) {
 			$scope.data = $scope.data.concat(d.data);
 			$scope.feedURL = d.pagination.next_url;
 			$scope.$apply();
+
+			$(window).scroll(function() {
+				if ($(document.body).height() - $(document.body).scrollTop() <= 2000) {
+					$scope.getMoar();
+				}
+			});
 		}).fail(function(j, s, e) {
 			if (j.statusCode() == 400) {
 				localStorage.removeItem("accessToken");
@@ -75,12 +82,6 @@ doge.controller('dogeCtrl', function ($scope) {
 		localStorage.removeItem("accessToken");
 		window.location = window.location.href;
 	}
-
-	$(window).scroll(function() {
-		if ($(document.body).height() - $(document.body).scrollTop() <= 2000) {
-			$scope.getMoar();
-		}
-	})
 })
 
 // $(function () {
