@@ -75,7 +75,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		window.location = window.location.href;
 	}
 
-	$(document.body).scroll(function() {
+	$(window).scroll(function() {
 		if ($(document.body).height() - $(document.body).scrollTop() <= 2000) {
 			$scope.getMoar();
 		}
