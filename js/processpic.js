@@ -144,9 +144,9 @@ function processMeme(img, comp, phrases){
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
 		    var pix = ctx.getImageData(x-10, y-10, 20, 20).data;
-		    var sum = 0;
-		    for (var i = pix.length-1; i >= 0; --i) sum += pix[i];
-		    sum/=(20*20*4);
+		    var pixsum = 0;
+		    for (var i = pix.length-1; i >= 0; --i) pixsum += pix[i];
+		    pixsum/=(20*20*4);
 		    
 		    for (var z = 0; z < 3; ++z) {
 		    	if (pixsum > 128) t = ran_range(3, colorList.length); //light
