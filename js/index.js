@@ -71,3 +71,7 @@ doge.controller('dogeCtrl', function ($scope) {
 	// 	}
 	// }
 })
+
+$(function () {
+	$("nav .btn").tooltip();
+})

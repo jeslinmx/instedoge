@@ -1,6 +1,20 @@
+#fthepolice {
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	text-align: center;
+}
+#fthepolice .container {
+	text-align: left;
+	position: relative;
+	display: inline-block;
+}
+nav {
+	position: absolute;
+	left: -150px;
+}
 #feed {
 	position: relative;
-	padding-top: 80px;
+	padding-top: 30px;
 }
 .media, .image {
 	position: relative;

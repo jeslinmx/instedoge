@@ -18,8 +18,19 @@
 	<script src="js/index.js"></script>
 </head>
 <body ng-controller='dogeCtrl' ng-init='getAuth()'>
+	<div id='fthepolice'>
+		<div class='container'>
+			<nav>
+				<div class='btn-group-vertical'>
+					<a class='btn btn-default' href="#" data-placement='left' title='doge'><span class='glyphicon glyphicon-home'></span></a>
+					<a class='btn btn-default' href="#" data-placement='left' title='dogesecrate my likes'><span class='glyphicon glyphicon-heart'></span></a>
+					<a class='btn btn-default' href="#" data-placement='left' title='hot doge'><span class='glyphicon glyphicon-fire'></span></a>
+					<a class='btn btn-danger' href="#" data-placement='left' title='dogeout'><span class='glyphicon glyphicon-off'></span></a>
+				</div>
+			</nav>
+		</div>
+	</div>
 	<div id='feed' class='container'>
-
 		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
 			<div class='image'>
 				{{processImage($index)}}
