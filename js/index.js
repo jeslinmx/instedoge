@@ -1,7 +1,7 @@
 var doge = angular.module('doge', []);
 doge.controller('dogeCtrl', function ($scope) {
 	$scope.processedBase64 = {};
-	// $scope.data = [];
+	$scope.data = [];
 	$scope.authURL = "https://instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token";
 	$scope.feedURL = "https://api.instagram.com/v1/users/self/feed"
 	$scope.getAuth = function() {
@@ -26,7 +26,7 @@ doge.controller('dogeCtrl', function ($scope) {
 			type: "GET",
 			dataType: "jsonp"
 		}).done(function(d, s, j) {
-			$scope.data = d.data;
+			$scope.data = $scope.data.concat(d.data);
 			$scope.$apply();
 		}).fail(function(j, s, e) {
 			if (j.statusCode() == 400) {
@@ -65,7 +65,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		});;
 	}
 	$scope.changeFeed = function (url) {
-		$scope.data = {};
+		$scope.data = [];
 		$scope.processedBase64 = {};
 		$scope.feedURL = url;
 		$scope.getMoar();
@@ -75,11 +75,11 @@ doge.controller('dogeCtrl', function ($scope) {
 		window.location = window.location.href;
 	}
 
-	// $(document.body).scroll(function() {
-	// 	if ($(document.body).height() - $(document.body).scrollTop() <= 2000) {
-	// 		$scope.getMoar();
-	// 	}
-	// })
+	$(document.body).scroll(function() {
+		if ($(document.body).height() - $(document.body).scrollTop() <= 2000) {
+			$scope.getMoar();
+		}
+	})
 })
 
 // $(function () {
