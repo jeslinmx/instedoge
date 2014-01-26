@@ -104,17 +104,18 @@ function processMeme(img, comp, phrases){
 			if (sum > brightestsum) brightestsum = sum;
 		}
 		console.log("Brightest = "+brightestsum);
+		
+		context.globalAlpha = 0.8;
 		for(var i = 0, n = imgData.length; i < n; i += 4) {
 			var sum = imgData[i] + imgData[i+1] + imgData[i+2] + imgData[i+3];
-			if (sum >= brightestsum-30) {
+			if (sum >= brightestsum) {
 				var x = Math.floor(i/canvas.width);
 				var y = i%canvas.width;
-				console.log(x+ " " + y);
+				context.drawImage(dog, x-50, y-50, 100, 100);
 			}
 		}
 		
-		context.globalAlpha = 0.6;
-		context.drawImage(dog, -80, -80, 780, 780);
+		//context.drawImage(dog, -80, -80, 780, 780);
 		ctx.drawImage(tmpcanvas, 0, 0);
 		
 	}
