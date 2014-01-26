@@ -118,7 +118,7 @@ function processMeme(img, comp, phrases){
 		var x = Math.floor(z/canvas.width);
 		var y = z%canvas.width;
 		context.drawImage(dog, x-50, y-50, 100, 100);
-		
+		console.log(x+" "+y);
 		
 		//context.drawImage(dog, -80, -80, 780, 780);
 		ctx.drawImage(tmpcanvas, 0, 0);
@@ -143,15 +143,17 @@ function processMeme(img, comp, phrases){
 			}
 			if (fail == 1) {  continue; }
 			savePos.push([x, y]);
-		    var pix = ctx.getImageData(x, y, 1, 1).data;
-		    var pixsum = pix[0] + pix[1] + pix[2] + pix[3];
+		    var pix = ctx.getImageData(x-10, y-10, 20, 20).data;
+		    var sum = 0;
+		    for (var i = pix.length-1; i >= 0; --i) sum += pix[i];
+		    sum/=(20*20*4);
 		    
 		    for (var z = 0; z < 3; ++z) {
-		    	if (pixsum > 500) t = ran_range(3, colorList.length); //light
+		    	if (pixsum > 128) t = ran_range(3, colorList.length); //light
 				else t = ran_range(0, 5); //dark
-				if (t in usedColour) continue;
-				usedColour[t] = 1;
-				break;
+				//if (t in usedColour) continue;
+				//usedColour[t] = 1;
+				//break;
 			}
 			ct.fillStyle = colorList[t];
 		    ct.save();
