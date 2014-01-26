@@ -143,10 +143,10 @@ function processMeme(img, comp, phrases){
 		//var z = brightestSpotClosest(canvas, ctx);
 		//var x = Math.floor(z/canvas.width);
 		//var y = z%canvas.width;
-		for (var k = ran_range(3, 6); k >= 0 ; --k) {
+		for (var k = ran_range(1, 4); k >= 0 ; --k) {
 			var x = ran_range(50, 600);
 			var y = ran_range(50, 600);
-			context.drawImage(dog, y-ran_range(25, 50), x-ran_range(25, 50), ran_range(50, 125), ran_range(50, 125));
+			context.drawImage(dog, y-ran_range(25, 40), x-ran_range(25, 40), ran_range(50, 75), ran_range(50, 75));
 		}
 		//console.log(x+" "+y);
 		
