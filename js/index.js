@@ -61,7 +61,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		// loading canvas logic here
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-			generateMeme(d.base64, $scope.data[x].caption.text, document.getElementById("image" + x)).done(function() {
+			generateMeme(d.base64, $scope.data[x].caption.text, $("#image" + x + " canvas")[0]).done(function() {
 				$scope.canvasStatus[x] = "doge";
 			});
 		})
