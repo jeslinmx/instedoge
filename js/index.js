@@ -56,7 +56,7 @@ doge.controller('dogeCtrl', function ($scope) {
 	$scope.processImage = function (x) {
 		if ($scope.canvasStatus[x]) return;
 		$scope.canvasStatus[x] = "loading";
-		$("#image" + x).prepend("<img src='loading.gif'>");
+		$("#image" + x).prepend("<img class='img-responsive' src='loading.gif'>");
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
 
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
@@ -67,7 +67,7 @@ doge.controller('dogeCtrl', function ($scope) {
 			generateMeme(d.base64, $scope.data[x].caption.text, canvas).done(function() {
 				$scope.canvasStatus[x] = "doge";
 			});
-		})
+		});
 
 		// if ($scope.imageCanvases[x]) return;
 		// $scope.imageCanvases[x] = $("<img src='loading.gif'>");
