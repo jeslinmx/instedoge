@@ -1,9 +1,9 @@
 var doge = angular.module('doge', []);
 doge.controller('dogeCtrl', function ($scope) {
-	$scope.canvasStatus = {};
+	$scope.processedBase64 = {};
 	$scope.data = [];
 	$scope.authURL = "https://instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token";
-	$scope.feedURL = "https://api.instagram.com/v1/users/self/feed";
+	$scope.feedURL = "https://api.instagram.com/v1/users/self/feed"
 	$scope.getAuth = function() {
 		var urlArray = window.location.href.split("#access_token=");
 		if (urlArray.length > 1) {
@@ -54,40 +54,27 @@ doge.controller('dogeCtrl', function ($scope) {
 		});
 	};
 	$scope.processImage = function (x) {
-		if ($scope.canvasStatus[x]) return;
-		$scope.canvasStatus[x] = "loading";
-		$("#image" + x).prepend("<img class='img-responsive' src='loading.gif'>");
+		if ($scope.processedBase64[x]) return;
+		$scope.processedBase64[x] = "loading.gif"
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
-
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-			var canvas = document.createElement('canvas');
-			canvas.width = canvas.height = 640;
-			$("#image" + x).children("img").remove();
-			$("#image" + x).prepend(canvas);
-			generateMeme(d.base64, $scope.data[x].caption.text, canvas).done(function() {
-				$scope.canvasStatus[x] = "doge";
+			generateMeme($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(meme) {
+				$scope.processedBase64[x] = meme;
+				$scope.$apply();
+			}).fail(function(j, s, e) {
+				$scope.processedBase64[x] = "error.png";
+				$scope.$apply();
+				console.log("very " + e);
 			});
-		});
-
-		// if ($scope.imageCanvases[x]) return;
-		// $scope.imageCanvases[x] = $("<img src='loading.gif'>");
-		// if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
-		// $scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-		// 	generateMeme(d.base64, $scope.data[x].caption.text).done(function(meme) {
-		// 		$scope.imageCanvases[x] = meme;
-		// 	}).fail(function(j, s, e) {
-		// 		$scope.imageCanvases[x] = $("<img src='error.png'>");
-		// 		console.log("very " + e);
-		// 	});
-		// }).fail(function(j, s, e) {
-		// 	$scope.imageCanvases[x] = $("<img src='error.png'>");
-		// 	$scope.$apply();
-		// 	console.log("very " + e);
-		// });
+		}).fail(function(j, s, e) {
+			$scope.processedBase64[x] = "error.png";
+			$scope.$apply();
+			console.log("very " + e);
+		});;
 	}
 	$scope.changeFeed = function (url) {
 		$scope.data = [];
-		$scope.canvasStatus = {};
+		$scope.processedBase64 = {};
 		$scope.feedURL = url;
 		$scope.getMoar();
 	}

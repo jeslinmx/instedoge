@@ -34,7 +34,9 @@
 	<div id='feed' class='container'>
 
 		<div class='thumbnail media' ng-repeat='image in data | filter: {type: "image"}'>
-			<div class='image' id='image{{$index}}'>
+			<div class='image'>
+				{{processImage($index)}}
+				<img class='img-responsive' ng-src="{{processedBase64[$index]}}">
 				<div class='verylikes'>
 					<span class='likes pull-right'><span class='glyphicon glyphicon-heart'></span> {{image.likes.count}}</span>
 					<div class='caption_text'>{{image.caption.text}}</div>
@@ -45,7 +47,6 @@
 				<div class='full_name'>{{image.user.full_name}}</div>
 				<div class='created_time'>{{convertTimestamp(image.created_time)}}</div>
 			</div>
-			{{processImage($index)}}
 		</div>
 
 	</div>
