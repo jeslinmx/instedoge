@@ -4,7 +4,6 @@ doge.controller('dogeCtrl', function ($scope) {
 	$scope.data = [];
 	$scope.authURL = "https://instagram.com/oauth/authorize/?client_id=094f2d8619bf430b97b396844c9fe5c4&redirect_uri=http://rawgithub.com/jeslinmx/instedoge/master/index.html&response_type=token";
 	$scope.feedURL = "https://api.instagram.com/v1/users/self/feed";
-	$scope.loadingImg = document.createElement("img"); $scope.loadingImg.src = "loading.gif";
 	$scope.getAuth = function() {
 		var urlArray = window.location.href.split("#access_token=");
 		if (urlArray.length > 1) {
@@ -57,11 +56,15 @@ doge.controller('dogeCtrl', function ($scope) {
 	$scope.processImage = function (x) {
 		if ($scope.canvasStatus[x]) return;
 		$scope.canvasStatus[x] = "loading";
-		$("#image" + x + " canvas")[0].getContext("2d").drawImage($scope.loadingImg,0,0);
-		// loading canvas logic here
+		$("#image" + x).prepend("<img src='loading.gif'>");
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
+
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-			generateMeme(d.base64, $scope.data[x].caption.text, $("#image" + x + " canvas")[0]).done(function() {
+			var canvas = document.createElement('canvas');
+			canvas.width = canvas.height = 640;
+			$("#image" + x).children("img").remove();
+			$("#image" + x).prepend(canvas);
+			generateMeme(d.base64, $scope.data[x].caption.text, canvas).done(function() {
 				$scope.canvasStatus[x] = "doge";
 			});
 		})

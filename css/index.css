@@ -23,6 +23,9 @@ nav {
 .media {
 	padding: 0;
 }
+.image {
+	height: 640px; width: 640px;
+}
 .verylikes {
 	color: #fff;
 	position: absolute;
