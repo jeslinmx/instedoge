@@ -57,11 +57,11 @@ doge.controller('dogeCtrl', function ($scope) {
 	$scope.processImage = function (x) {
 		if ($scope.canvasStatus[x]) return;
 		$scope.canvasStatus[x] = "loading";
-		document.getElementByID("image" + x).getContext("2d").drawImage($scope.loadingImg,0,0);
+		document.getElementById("image" + x).getContext("2d").drawImage($scope.loadingImg,0,0);
 		// loading canvas logic here
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-			generateMeme(d.base64, $scope.data[x].caption.text, document.getElementByID("image" + x)).done(function() {
+			generateMeme(d.base64, $scope.data[x].caption.text, document.getElementById("image" + x)).done(function() {
 				$scope.canvasStatus[x] = "doge";
 			});
 		})
