@@ -2,7 +2,6 @@ function generateMeme(src, caption) {
 	var deferred = $.Deferred();
 	var img = document.createElement('img');
 	img.src = src;
-	img.crossOrigin = "anonymous";
 	img.onload = function () {
 		img.onload = null;
 		var comp = detectNewImage(this);

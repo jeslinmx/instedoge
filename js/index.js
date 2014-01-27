@@ -58,7 +58,7 @@ doge.controller('dogeCtrl', function ($scope) {
 		$scope.processedBase64[x] = "loading.gif"
 		if ($scope.data[x].caption === null) $scope.data[x].caption = {text:""};
 		$scope.getBase64($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(d,s,j){
-			generateMeme($scope.data[x].images.standard_resolution.url, $scope.data[x].caption.text).done(function(meme) {
+			generateMeme(d.base64, $scope.data[x].caption.text).done(function(meme) {
 				$scope.processedBase64[x] = meme;
 				$scope.$apply();
 			}).fail(function(j, s, e) {
